@@ -21,8 +21,10 @@ from starkware.cairo.common.cairo_secp.signature import (
     public_key_point_to_eth_address,
 )
 
-from openzeppelin.contracts import ERC721
-from openzeppelin.contracts import ERC165
+from token.ERC721.ERC721_Metadata_base import (
+    ERC721_Metadata_initializer,
+    ERC721_Metadata_tokenURI,
+    ERC721_Metadata_setBaseTokenURI,
 
 from token.ERC721.ERC721_Metadata_base import (
     ERC721_Metadata_initializer,
@@ -50,7 +52,7 @@ func linkedAddresses(l2_addr: felt) -> (l1_addr: felt) {
 # Constructor
 
 @external
-func __init__(
+func mint{pedersen_ptr: HashBuiltin*, syscall_ptr: felt*, range_check_ptr}(
 name: felt, symbol: felt, owner: felt, base_token_uri_len: felt, base_token_uri: felt*, token_uri_suffix: felt) {
     name: felt,
     symbol: felt,
