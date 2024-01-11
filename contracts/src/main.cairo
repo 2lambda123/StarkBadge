@@ -47,8 +47,11 @@ func linkedAddresses(l2_addr: felt) -> (l1_addr: felt) {
 // Constructor
 //
 
-@constructor
-func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+# Constructor
+
+@external
+func __init__(
+name: felt, symbol: felt, owner: felt, base_token_uri_len: felt, base_token_uri: felt*, token_uri_suffix: felt) {
     name: felt,
     symbol: felt,
     owner: felt,
