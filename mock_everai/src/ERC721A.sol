@@ -37,7 +37,17 @@ contract ERC721A is Context, ERC165, IERC721, IERC721Metadata {
     using Address for address;
     using Strings for uint256;
 
-    // Compiler will pack this into a single 256bit word.
+    struct TokenOwnership {
+        address addr;
+        uint64 startTimestamp;
+        bool burned;
+    }
+
+    struct AddressData {
+        uint64 balance;
+        uint64 numberMinted;
+        uint64 numberBurned;
+        uint64 aux;
     struct TokenOwnership {
         // The address of the owner.
         address addr;
