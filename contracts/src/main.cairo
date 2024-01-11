@@ -21,9 +21,8 @@ from starkware.cairo.common.cairo_secp.signature import (
     public_key_point_to_eth_address,
 )
 
-from openzeppelin.token.erc721.library import ERC721
-from openzeppelin.introspection.erc165.library import ERC165
-from openzeppelin.access.ownable.library import Ownable
+from openzeppelin.contracts import ERC721
+from openzeppelin.contracts import ERC165
 
 from token.ERC721.ERC721_Metadata_base import (
     ERC721_Metadata_initializer,
