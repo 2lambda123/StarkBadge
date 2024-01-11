@@ -9,10 +9,10 @@ import "openzeppelin-contracts/contracts/utils/Context.sol";
 import "openzeppelin-contracts/contracts/utils/Strings.sol";
 import "openzeppelin-contracts/contracts/utils/introspection/ERC165.sol";
 
-error ApprovalCallerNotOwnerNorApproved();
-error ApprovalQueryForNonexistentToken();
-error ApproveToCaller();
-error ApprovalToCurrentOwner();
+error ApprovalCallerNotOwnerNorApproved(string message);
+error ApprovalQueryForNonexistentToken(string message);
+error ApproveToCaller(string message);
+error ApprovalToCurrentOwner(string message);
 error BalanceQueryForZeroAddress();
 error MintToZeroAddress();
 error MintZeroQuantity();
