@@ -31,8 +31,9 @@ func ERC721_base_token_uri_suffix() -> (res: felt) {
 // Constructor
 //
 
+@init
 func ERC721_Metadata_initializer{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
-    ) {
+    ) {}
     // register IERC721_Metadata
     ERC165.register_interface(0x5b5e139f);
     return ();
