@@ -9,10 +9,10 @@ import "openzeppelin-contracts/contracts/utils/Context.sol";
 import "openzeppelin-contracts/contracts/utils/Strings.sol";
 import "openzeppelin-contracts/contracts/utils/introspection/ERC165.sol";
 
-error ApprovalCallerNotOwnerNorApproved();
-error ApprovalQueryForNonexistentToken();
-error ApproveToCaller();
-error ApprovalToCurrentOwner();
+error ApprovalCallerNotOwnerNorApproved(string message);
+error ApprovalQueryForNonexistentToken(string message);
+error ApproveToCaller(string message);
+error ApprovalToCurrentOwner(string message);
 error BalanceQueryForZeroAddress();
 error MintToZeroAddress();
 error MintZeroQuantity();
@@ -37,7 +37,17 @@ contract ERC721A is Context, ERC165, IERC721, IERC721Metadata {
     using Address for address;
     using Strings for uint256;
 
-    // Compiler will pack this into a single 256bit word.
+    struct TokenOwnership {
+        address addr;
+        uint64 startTimestamp;
+        bool burned;
+    }
+
+    struct AddressData {
+        uint64 balance;
+        uint64 numberMinted;
+        uint64 numberBurned;
+        uint64 aux;
     struct TokenOwnership {
         // The address of the owner.
         address addr;
