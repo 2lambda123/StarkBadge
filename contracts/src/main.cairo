@@ -21,9 +21,10 @@ from starkware.cairo.common.cairo_secp.signature import (
     public_key_point_to_eth_address,
 )
 
-from openzeppelin.token.erc721.library import ERC721
-from openzeppelin.introspection.erc165.library import ERC165
-from openzeppelin.access.ownable.library import Ownable
+from token.ERC721.ERC721_Metadata_base import (
+    ERC721_Metadata_initializer,
+    ERC721_Metadata_tokenURI,
+    ERC721_Metadata_setBaseTokenURI,
 
 from token.ERC721.ERC721_Metadata_base import (
     ERC721_Metadata_initializer,
@@ -48,8 +49,11 @@ func linkedAddresses(l2_addr: felt) -> (l1_addr: felt) {
 // Constructor
 //
 
-@constructor
-func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+# Constructor
+
+@external
+func mint{pedersen_ptr: HashBuiltin*, syscall_ptr: felt*, range_check_ptr}(
+name: felt, symbol: felt, owner: felt, base_token_uri_len: felt, base_token_uri: felt*, token_uri_suffix: felt) {
     name: felt,
     symbol: felt,
     owner: felt,
@@ -87,6 +91,19 @@ func name{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> 
     let (name) = ERC721.name();
     return (name,);
 }
+@view
+func supportsInterface{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    interface_id: felt
+) -> (success: felt) {
+    let (success) = ERC165.supports_interface(interface_id);
+    return (success,);
+}
+
+@view
+func name{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (name: felt) {
+    let (name) = ERC721.name();
+    return (name,);
+}
 
 @view
 func symbol{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (symbol: felt) {
@@ -102,6 +119,121 @@ func balanceOf{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     return (balance,);
 }
 
+@view
+func ownerOf{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    token_id: Uint256
+) -> (owner: felt) {
+    let (owner: felt) = ERC721.owner_of(token_id);
+    return (owner,);
+}
+
+@view
+func tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    token_id: Uint256
+) -> (token_uri_len: felt, token_uri: felt*) {
+    let (token_uri_len, token_uri) = ERC721_Metadata_tokenURI(token_id);
+    return (token_uri_len=token_uri_len, token_uri=token_uri);
+}
+@view
+func supportsInterface{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    interface_id: felt
+) -> (success: felt) {
+    let (success) = ERC165.supports_interface(interface_id);
+    return (success,);
+}
+
+@view
+func name{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (name: felt) {
+    let (name) = ERC721.name();
+    return (name,);
+}
+
+@view
+func symbol{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (symbol: felt) {
+    let (symbol) = ERC721.symbol();
+    return (symbol,);
+}
+
+@view
+func balanceOf{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(owner: felt) -> (
+    balance: Uint256
+) {
+    let (balance: Uint256) = ERC721.balance_of(owner);
+    return (balance,);
+}
+
+@view
+func ownerOf{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    token_id: Uint256
+) -> (owner: felt) {
+    let (owner: felt) = ERC721.owner_of(token_id);
+    return (owner,);
+}
+
+@view
+func tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    token_id: Uint256
+) -> (token_uri_len: felt, token_uri: felt*) {
+    let (token_uri_len, token_uri) = ERC721_Metadata_tokenURI(token_id);
+    return (token_uri_len=token_uri_len, token_uri=token_uri);
+}
+@view
+func supportsInterface{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    interface_id: felt
+) -> (success: felt) {
+    let (success) = ERC165.supports_interface(interface_id);
+    return (success,);
+}
+
+@view
+func name{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (name: felt) {
+    let (name) = ERC721.name();
+    return (name,);
+}
+
+@view
+func symbol{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (symbol: felt) {
+    let (symbol) = ERC721.symbol();
+    return (symbol,);
+}
+
+@view
+func balanceOf{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(owner: felt) -> (
+    balance: Uint256
+) {
+    let (balance: Uint256) = ERC721.balance_of(owner);
+    return (balance,);
+}
+
+@view
+func ownerOf{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    token_id: Uint256
+) -> (owner: felt) {
+    let (owner: felt) = ERC721.owner_of(token_id);
+    return (owner,);
+}
+
+@view
+func tokenURI{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    token_id: Uint256
+) -> (token_uri_len: felt, token_uri: felt*) {
+    let (token_uri_len, token_uri) = ERC721_Metadata_tokenURI(token_id);
+    return (token_uri_len=token_uri_len, token_uri=token_uri);
+}
+
+@view
+func symbol{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (symbol: felt) {
+    let (symbol) = ERC721.symbol();
+    return (symbol,);
+}
+
+@view
+func balanceOf{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(owner: felt) -> (
+    balance: Uint256
+) {
+    let (balance: Uint256) = ERC721.balance_of(owner);
+    return (balance,);
+}
 @view
 func ownerOf{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     token_id: Uint256
